@@ -1,0 +1,39 @@
+﻿DROP TABLE IF EXISTS "tasks" CASCADE;
+DROP TABLE IF EXISTS "slots" CASCADE;
+DROP TABLE IF EXISTS "days" CASCADE;
+DROP TABLE IF EXISTS "schedules" CASCADE;
+DROP TABLE IF EXISTS "users" CASCADE;
+
+CREATE TABLE users(
+    user_email VARCHAR(50) Primary Key,
+    nickname VARCHAR(20),
+    pw TEXT,
+    salt TEXT
+);
+
+CREATE TABLE schedules (
+    schedule_id SERIAL PRIMARY KEY,
+    schedule_name VARCHAR(30),
+    user_email VARCHAR(50) REFERENCES users(user_email) --Edited user_id -> user_email
+);
+
+CREATE TABLE days (
+    day_id SERIAL PRIMARY KEY,
+    day_name VARCHAR(30),
+    schedule_id INT REFERENCES schedules(schedule_id),
+    day_number SERIAL
+);
+
+CREATE TABLE tasks(
+    task_id SERIAL PRIMARY KEY,
+    task_title VARCHAR(30),
+    task_description TEXT,
+    image_url TEXT 
+);
+
+CREATE TABLE slots (
+    slot_id SERIAL PRIMARY KEY,
+    slot_number SERIAL,
+    day_id INT REFERENCES days(day_id),
+    task_id INT REFERENCES tasks(task_id)
+);
