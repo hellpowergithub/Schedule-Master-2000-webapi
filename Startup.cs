@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Schedule_Master_2000_webapi
+namespace ScheduleMaster
 {
     public class Startup
     {
@@ -35,6 +35,10 @@ namespace Schedule_Master_2000_webapi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames =  new List<string> { "index.html" } });
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
