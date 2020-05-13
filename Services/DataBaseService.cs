@@ -12,6 +12,7 @@ namespace ScheduleMaster.Services
         private static readonly string _conn = Program.ConnectionString;
         private static NpgsqlConnection conn = new NpgsqlConnection(_conn);
 
+
         public string GetScheduleName(string email)
         {
             string scheduleName = "";
@@ -113,20 +114,223 @@ namespace ScheduleMaster.Services
         }
 
         //POST
-        public void AddNew1Schedule(string email, string name)
+        public void AddNew1Schedule(string userId, string scheduleName)
         {
-            // name = schedule's Name
             using (conn)
             {
                 conn.Open();
                 using (var cmd = new NpgsqlCommand("INSERT INTO schedules(schedule_name, user_email) VALUES(@name, @email); ", conn))
                 {
-                    cmd.Parameters.AddWithValue("name", name);
-                    cmd.Parameters.AddWithValue("email", email);
+                    cmd.Parameters.AddWithValue("name", scheduleName);
+                    cmd.Parameters.AddWithValue("email", userId);
                     cmd.ExecuteNonQuery();
 
                 }
             }
         }
+
+
+
+
+
+
+        //return ALL Days, based on schedule_id
+        public List<Day> GetAllDay(int scheduleId)
+        {
+
+            var allDays = new List<Day>();
+
+            using (conn)
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand("SELECT * FROM days WHERE @schedule_id = schedule_id", conn))
+                {
+                    cmd.Parameters.AddWithValue("schedule_id", scheduleId);
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int Id = Convert.ToInt32(reader["day_id"]);
+                        string dayName = reader["day_name"].ToString();
+                        int dayNumber = Convert.ToInt32(reader["day_number"]);
+                        Day day = new Day(Id, dayName, dayNumber);
+                        allDays.Add(day);
+                    }
+                }
+            }
+
+            return allDays;
+        }
+
+
+        // returns all Tasks
+        public List<Domain.Task> GetAllTasks(int userId)
+        {
+            List<Domain.Task> allTask = new List<Domain.Task>();
+            using (conn)
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand("SELECT * FROM tasks WHERE @uid = user_id", conn))
+                {
+                    cmd.Parameters.AddWithValue("uid", userId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int id = Convert.ToInt32(reader["task_id"]);
+                        string title = reader["task_title"].ToString();
+                        string description = reader["task_description"].ToString();
+                        //string imgUrl = reader["image_url"].ToString();
+
+                        Domain.Task task = new Domain.Task(id, title, description);
+                        allTask.Add(task);
+                    }
+                }
+            }
+
+            return allTask;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //ok
     }
 }

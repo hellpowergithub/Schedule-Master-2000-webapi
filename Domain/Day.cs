@@ -21,5 +21,19 @@ namespace ScheduleMaster.Domain
             ScheduleId = scheduleId;
             DayNumber = dayNumber;
         }
+
+
+
+        public Day(int id, string name, int dayNumber)
+        {
+            Id = id;
+            Name = name;
+            DayNumber = dayNumber;
+        }
+
+        public Day()
+        {
+
+        }
     }
 }

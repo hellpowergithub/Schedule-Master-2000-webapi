@@ -14,11 +14,26 @@ namespace ScheduleMaster.Domain
 
         public string Description { get; set; }
 
+        public string ImgUrl { get; set; }
+
+        public Task(int id, string title, string description, string imgUrl)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            ImgUrl = imgUrl;
+        }
+
         public Task(int id, string title, string description)
         {
             Id = id;
             Title = title;
             Description = description;
+        }
+
+        public Task()
+        {
+
         }
     }
 }
