@@ -11,6 +11,7 @@ using ScheduleMaster.Services;
 using System.Web;
 using Nancy.Json;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Schedule_Master_2000_webapi.Controllers
 {
@@ -45,7 +46,10 @@ namespace Schedule_Master_2000_webapi.Controllers
 
         //}
 
-        // Maybe this? 
+
+
+
+
         [HttpGet("{email}")]
 
         public string Get(string email)
@@ -65,5 +69,14 @@ namespace Schedule_Master_2000_webapi.Controllers
 
         //Post request MISSING (tomorrow, Wednesday)
 
+        [Authorize] //only if you have the permission to do it
+        [HttpPost]
+        public void PostNew1Schedule(string email, string name)
+        {
+            // name = schedule's name
+            dbService.AddNew1Schedule("erik@erik.com", "new Schedule");
+            //response ID back maybe
+
+        }
     }
 }

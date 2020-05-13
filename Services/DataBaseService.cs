@@ -111,5 +111,22 @@ namespace ScheduleMaster.Services
 
             return schedules;
         }
+
+        //POST
+        public void AddNew1Schedule(string email, string name)
+        {
+            // name = schedule's Name
+            using (conn)
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand("INSERT INTO schedules(schedule_name, user_email) VALUES(@name, @email); ", conn))
+                {
+                    cmd.Parameters.AddWithValue("name", name);
+                    cmd.Parameters.AddWithValue("email", email);
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
     }
 }
