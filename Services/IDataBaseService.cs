@@ -8,7 +8,8 @@ namespace ScheduleMaster.Services
 {
     public interface IDataBaseService
     {
-
+        //User
+        
 
         //Schedule
         List<Schedule> GetSchedules(string email);

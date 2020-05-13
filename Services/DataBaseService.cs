@@ -51,10 +51,65 @@ namespace ScheduleMaster.Services
                         //scheduleName = reader["schedule_name"].ToString();
                     }
                 }
-                
+
             }
 
             return allSchedules;
+        }
+
+        public Schedule Get1Schedule(string email)
+        {
+            var schedule = new Schedule();
+
+            using (conn)
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand("SELECT * FROM schedules WHERE @email = user_email", conn))
+                {
+                    cmd.Parameters.AddWithValue("email", email);
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int Id = Convert.ToInt32(reader["schedule_id"]);
+                        var Name = reader["schedule_name"].ToString();
+                        string UserEmail = reader["user_email"].ToString();
+                        schedule = new Schedule(Id, Name, UserEmail);
+                    }
+                }
+
+            }
+
+            return schedule;
+        }
+
+
+        //returns ALL schedules from the user
+        public List<Schedule> GetAllSchedule(string email)
+        {
+            var schedules = new List<Schedule>();
+
+            using (conn)
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand("SELECT * FROM schedules WHERE @email = user_email", conn))
+                {
+                    cmd.Parameters.AddWithValue("email", email);
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int Id = Convert.ToInt32(reader["schedule_id"]);
+                        var Name = reader["schedule_name"].ToString();
+                        string UserEmail = reader["user_email"].ToString();
+                        var schedule = new Schedule(Id, Name, UserEmail);
+                        schedules.Add(schedule);
+                    }
+                }
+
+            }
+
+            return schedules;
         }
     }
 }

@@ -18,6 +18,8 @@ namespace ScheduleMaster
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -26,6 +28,8 @@ namespace ScheduleMaster
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            //services.AddDbContext
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,13 +11,17 @@ namespace ScheduleMaster.Domain
 
         public string Name { get; set; }
 
-        public int UserEmail { get; set; }
+        public string UserEmail { get; set; }
 
-        public Schedule(int id, string name, int userEmail)
+        public Schedule(int id, string name, string userEmail)
         {
             Id = id;
             Name = name;
             UserEmail = userEmail;
+        }
+
+        public Schedule()
+        {
         }
     }
 }

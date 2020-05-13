@@ -37,3 +37,30 @@ CREATE TABLE slots (
     day_id INT REFERENCES days(day_id),
     task_id INT REFERENCES tasks(task_id)
 );
+
+
+--
+
+
+
+
+INSERT INTO users(user_email, nickname, pw, salt)
+VALUES ('zoli@zoli.com', 'ZoliNick', 'zoli', 'salt');
+INSERT INTO users(user_email, nickname, pw, salt)
+VALUES ('gergo@gergo.com', 'GergokNickname', 'gergo', 'salt');
+INSERT INTO users(user_email, nickname, pw, salt)
+VALUES ('erik@erik.com', 'ErikNickname', 'erik', 'salt');
+
+
+INSERT INTO schedules(schedule_name, user_email)
+VALUES ('ScheduleZoli', 'zoli@zoli.com');
+INSERT INTO schedules(schedule_name, user_email)
+VALUES ('ScheduleGergo', 'gergo@gergo.com');
+INSERT INTO schedules(schedule_name, user_email)
+VALUES ('ScheduleErik', 'erik@erik.com');
+INSERT INTO schedules(schedule_name, user_email)
+VALUES ('ScheduleErik2', 'erik@erik.com');
+INSERT INTO schedules(schedule_name, user_email)
+VALUES ('ScheduleErik3', 'erik@erik.com');
+INSERT INTO schedules(schedule_name, user_email)
+VALUES ('ScheduleErik4', 'erik@erik.com');
