@@ -161,7 +161,7 @@ namespace ScheduleMaster.Services
                     {
                         int Id = Convert.ToInt32(reader["schedule_id"]);
                         var Name = reader["schedule_name"].ToString();
-                        string UserEmail = reader["user_email"].ToString();
+                        string UserEmail = reader["user_id"].ToString();
                         var schedule = new Schedule(Id, Name, UserEmail);
                         schedules.Add(schedule);
                     }
