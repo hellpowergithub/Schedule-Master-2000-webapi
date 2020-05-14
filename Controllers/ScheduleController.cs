@@ -12,14 +12,17 @@ using System.Web;
 using Nancy.Json;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
+using Schedule_Master_2000_webapi.Services;
 
 namespace Schedule_Master_2000_webapi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class ScheduleController : ControllerBase
     {
         private static DataBaseService dbService = new DataBaseService();
+        private static UserAuthenticator userAuth = new UserAuthenticator();
         //private readonly ScheduleContext _context;
 
         //public ScheduleController(ScheduleContext context)
@@ -69,14 +72,27 @@ namespace Schedule_Master_2000_webapi.Controllers
 
         //Post request MISSING (tomorrow, Wednesday)
 
-        [Authorize] //only if you have the permission to do it
         [HttpPost]
         public void PostNew1Schedule(string email, string name)
         {
+
             // name = schedule's name
             dbService.AddNew1Schedule("erik@erik.com", "new Schedule");
             //response ID back maybe
 
         }
+
+
+
+        [HttpDelete]
+        public void Delete1Schedule([FromForm] string userId, [FromForm] string scheduleId)
+        {
+            dbService.DeleteSchedule(userId, scheduleId);
+        }
+
+
+
+
+
     }
 }

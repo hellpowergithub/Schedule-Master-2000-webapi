@@ -8,11 +8,13 @@ using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 using Nancy.Json;
 using ScheduleMaster.Services;
 using ScheduleMaster.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Schedule_Master_2000_webapi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class TaskController : ControllerBase
     {
         private static DataBaseService dbService = new DataBaseService();
@@ -31,10 +33,19 @@ namespace Schedule_Master_2000_webapi.Controllers
         }
 
 
+        [HttpPost]
+        public void ModifyTask([FromForm] string title, [FromForm] string description, [FromForm] string userId, [FromForm] string taskId)
+        {
+            //check user here?
+            dbService.ModifyTask(title, description, userId, taskId);
+        }
 
 
-
-
+        [HttpDelete] // or [HttpPost]
+        public void DeleteTask([FromForm] string userId, [FromForm] string taskId)
+        {
+            dbService.DeleteTask(userId, taskId);
+        }
 
 
 

@@ -23,7 +23,8 @@ namespace ScheduleMaster
             Password = password;
         }
 
-
-
+        public User()
+        {
+        }
     }
 }
