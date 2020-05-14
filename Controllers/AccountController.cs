@@ -15,7 +15,7 @@ using ScheduleMaster.Services;
 
 namespace Schedule_Master_2000_webapi.Controllers
 {
-    [ApiController]
+    
     public class AccountController : ControllerBase
     {
         private static UserAuthenticator userAuth = new UserAuthenticator();
@@ -41,7 +41,6 @@ namespace Schedule_Master_2000_webapi.Controllers
 
             return RedirectToAction("index.html");
         }
-
 
 
 

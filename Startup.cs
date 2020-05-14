@@ -29,6 +29,8 @@ namespace ScheduleMaster
         {
             services.AddControllers();
 
+            services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
             //services.AddDbContext
         }
 
@@ -47,6 +49,8 @@ namespace ScheduleMaster
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
