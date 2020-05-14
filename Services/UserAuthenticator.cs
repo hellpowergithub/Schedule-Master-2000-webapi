@@ -14,6 +14,20 @@ namespace Schedule_Master_2000_webapi.Services
         private static DataBaseService dbService = new DataBaseService();
         private static List<User> allUsers = dbService.GetAllUser();
 
+        public User GetUser(string email, string password)
+        {
+            foreach (var user in allUsers)
+            {
+                if (email == user.Email && password == user.Password)
+                {
+                    var user2 = new User(user.Email, user.Nickname, user.Password);
+                    return user2;
+                }
+            }
+            return null; 
+
+        }
+
         public bool IsAdmin(string email, string password)
         {
             foreach (var user in allUsers)
@@ -23,8 +37,10 @@ namespace Schedule_Master_2000_webapi.Services
                     return true;
                 }
             }
-            return false; 
+            return false;
         }
+
+
 
     }
 }
