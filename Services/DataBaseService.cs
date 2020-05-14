@@ -152,7 +152,7 @@ namespace ScheduleMaster.Services
             using (conn)
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("SELECT * FROM schedules WHERE @email = user_email", conn))
+                using (var cmd = new NpgsqlCommand("SELECT * FROM schedules WHERE @email = user_id", conn))
                 {
                     cmd.Parameters.AddWithValue("email", email);
                     var reader = cmd.ExecuteReader();
