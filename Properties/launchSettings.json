@@ -20,7 +20,7 @@
     "Schedule_Master_2000_webapi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "schedule/erik@erik.com",
       "environmentVariables": {
         "DB_USER": "postgres",
         "DB_NAME": "Schedule Master 2000",

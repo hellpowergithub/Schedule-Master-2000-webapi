@@ -18,56 +18,34 @@ namespace Schedule_Master_2000_webapi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class ScheduleController : ControllerBase
     {
         private static DataBaseService dbService = new DataBaseService();
         private static UserAuthenticator userAuth = new UserAuthenticator();
         //private readonly ScheduleContext _context;
 
-        //public ScheduleController(ScheduleContext context)
-        //{
-        //    _context = context;
-        //}
+       
 
 
 
-        //-------------------------------------------------
-
-        //[HttpGet]
-        //public async Task<ActionResult<Schedule>> GetSchedule(string email)
-        //{
-        //    Schedule UserSchedule = await _context.Schedules.FindAsync(email);
-
-        //    if (UserSchedule == null)
-        //    {
-        //        Console.WriteLine("User Schedule == null");
-        //    }
-
-        //    return UserSchedule;
 
 
-        //}
-
-
+        private static List<Schedule> allScheduleOfUser;
 
 
 
         [HttpGet("{email}")]
 
-        public string Get(string email)
-        
+        public IEnumerable<Schedule> Get()
+
         {
 
             //function, to GET a schedule from DataBase
-            var schedule = dbService.GetAllSchedule(email); //CHANGE
+            allScheduleOfUser = dbService.GetAllSchedule("erik@erik.com"); //CHANGE
 
             //
-            Console.WriteLine(schedule.ToString());
 
-            var json = new JavaScriptSerializer().Serialize(schedule);
-            Console.WriteLine(json);
-            return json;
+            return allScheduleOfUser;
         }
 
         //Post request MISSING (tomorrow, Wednesday)
