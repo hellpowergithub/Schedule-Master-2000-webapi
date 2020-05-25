@@ -16,11 +16,8 @@
 const URL = "/Account/Login";
 const email_input = document.getElementById("email");
 const password_input = document.getElementById("password");
-
-
-//
-
-
+const schedule_div = document.querySelector(".schedule");
+const login_div = document.querySelector(".login")
 
 function doLogin() {
     var data = new FormData();
@@ -30,21 +27,15 @@ function doLogin() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", URL);
     xhr.onload = function () {
-        // this = xhr object
-
-       
-
-        // Code continues HERE
-        // xhr -> /Schedule (do what we did today)
 
         if (this.status === 200) {
             console.log("OK");
+            schedule_div.classList.remove("hidden");
+            login_div.classList.add("hidden");
+
         } else {
             console.log("Error");
         }
-
-
-
     };
     xhr.send(data);
 }
