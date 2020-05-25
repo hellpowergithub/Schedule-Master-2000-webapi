@@ -13,6 +13,7 @@ using Nancy.Json;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Schedule_Master_2000_webapi.Services;
+using System.Security.Claims;
 
 namespace Schedule_Master_2000_webapi.Controllers
 {
@@ -34,13 +35,15 @@ namespace Schedule_Master_2000_webapi.Controllers
 
 
 
-        [HttpGet("{email}")]
-
-        public IEnumerable<Schedule> Get()
+        [HttpGet("[action]")]
+        public IEnumerable<Schedule> UserSchedules()
         {
 
+            string email = HttpContext.User.FindFirstValue("Email");
+
+
             //function, to GET a schedule from DataBase
-            allScheduleOfUser = dbService.GetAllSchedule("erik@erik.com"); //CHANGE
+            allScheduleOfUser = dbService.GetAllSchedule(email); //CHANGE
 
             //
 

@@ -30,14 +30,28 @@ function doLogin() {
 
         if (this.status === 200) {
             console.log("OK");
+            console.log(this.responseText);
             schedule_div.classList.remove("hidden");
             login_div.classList.add("hidden");
+            scheduleXHR();
 
         } else {
             console.log("Error");
+            // alert Error
         }
     };
     xhr.send(data);
+}
+
+
+function scheduleXHR() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/Schedule/UserSchedules");
+    xhr.onload = function () {
+        // parse it to JSON
+        console.log(this.responseText);
+    }
+    xhr.send();
 }
 
 

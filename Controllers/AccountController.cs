@@ -48,6 +48,10 @@ namespace Schedule_Master_2000_webapi.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] string email, [FromForm]string password)
         {
+            //validate User, from ALLUsers in the DataBase
+
+
+
 
             User user = new User(email, password);
             if(user == null)
@@ -55,13 +59,13 @@ namespace Schedule_Master_2000_webapi.Controllers
                 Console.WriteLine("User Doesn't exist in Database");
             }
             //conditions, to determine wheter user IS the admin
-            else if (user.Password != "admin" || user.Email != "admin@admin.com")
+            else if (user.Password != "erik" || user.Email != "erik@erik.com")
             {
                 //do something, Give access to everything
                 return new StatusCodeResult(401);
             }
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Email, user.Email) };
+            var claims = new List<Claim> { new Claim("Email", user.Email) };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
