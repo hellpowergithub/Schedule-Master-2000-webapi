@@ -23,6 +23,12 @@ namespace ScheduleMaster
             Password = password;
         }
 
+        public User(string email, string password)
+        {
+            Email = email;
+            Password = password;
+        }
+
         public User()
         {
         }

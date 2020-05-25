@@ -37,7 +37,6 @@ namespace Schedule_Master_2000_webapi.Controllers
         [HttpGet("{email}")]
 
         public IEnumerable<Schedule> Get()
-
         {
 
             //function, to GET a schedule from DataBase

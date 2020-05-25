@@ -57,6 +57,7 @@ namespace ScheduleMaster
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+               
             });
         }
     }
