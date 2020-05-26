@@ -49,14 +49,44 @@ function scheduleXHR() {
     xhr.open("GET", "/Schedule/UserSchedules");
     xhr.onload = function () {
         // parse it to JSON
-        console.log(this.responseText);
+        var schedules = JSON.parse(this.responseText);
+
+        ScheduleToList(schedules);
     }
     xhr.send();
 }
 
 
+function ScheduleToList(schedules) {
+
+    const schedule_ul = document.getElementById("schedule_list");
+
+    
+
+    for (var i = 0; i < schedules.length; i++) {
+        var schedule = schedules[i];
+        console.log(schedule.id);
+        console.log(schedule.name);
+        console.log(schedule.userEmail);
+
+        const li = document.createElement('li');
+
+        const p = document.createElement('p');
 
 
+        var id = schedule.id;
+        var name = schedule.name;
+        var userEmail = schedule.userEmail;
+
+
+        p.appendChild(document.createTextNode(`Id: ${id}, Name: ${name}, Email: ${userEmail} \n`));
+        li.appendChild(p);
+        schedule_ul.appendChild(li);
+
+    }
+    return schedule_ul;
+
+}
 
 
 
