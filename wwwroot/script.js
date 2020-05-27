@@ -18,6 +18,7 @@ const email_input = document.getElementById("email");
 const password_input = document.getElementById("password");
 const schedule_div = document.querySelector(".schedule");
 const login_div = document.querySelector(".login")
+const create_schedule_div = document.querySelector(".create_schedule");
 
 function doLogin() {
     var data = new FormData();
@@ -33,6 +34,7 @@ function doLogin() {
             console.log(this.responseText);
             schedule_div.classList.remove("hidden");
             login_div.classList.add("hidden");
+            create_schedule_div.classList.remove("hidden");
             scheduleXHR();
 
         } else {
@@ -42,6 +44,20 @@ function doLogin() {
     };
     xhr.send(data);
 }
+
+function createSchedule() {
+    const title_input = document.getElementById("title");
+    var data = new FormData();
+    data.append("name", title_input.value);
+
+
+    var xhr = new XMLHttpRequest();
+    // send POST to URL, which will add new Schedule
+    // to DataBase
+    xhr.open("POST", "/Schedule/CreateSchedule");
+    xhr.send(data);
+}
+
 
 
 function scheduleXHR() {
@@ -61,7 +77,7 @@ function ScheduleToList(schedules) {
 
     const schedule_ul = document.getElementById("schedule_list");
 
-    
+
 
     for (var i = 0; i < schedules.length; i++) {
         var schedule = schedules[i];

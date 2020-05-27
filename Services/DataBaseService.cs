@@ -18,7 +18,7 @@ namespace ScheduleMaster.Services
         {
             List<User> allUser = new List<User>();
 
-            using (conn)
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
                 using (var cmd = new NpgsqlCommand("SELECT * FROM users", conn))
@@ -75,7 +75,7 @@ namespace ScheduleMaster.Services
         public string GetScheduleName(string email)
         {
             string scheduleName = "";
-            using (var conn = new NpgsqlConnection(_conn)) 
+            using (var conn = new NpgsqlConnection(Program.ConnectionString)) 
             {
                 conn.Open();
                
@@ -98,7 +98,7 @@ namespace ScheduleMaster.Services
         {
             var allSchedules = new List<Schedule>();
 
-            using (conn)
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
                 using (var cmd = new NpgsqlCommand("", conn))
@@ -121,7 +121,7 @@ namespace ScheduleMaster.Services
         {
             var schedule = new Schedule();
 
-            using (conn)
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
                 using (var cmd = new NpgsqlCommand("SELECT * FROM schedules WHERE @email = user_email", conn))
@@ -175,10 +175,10 @@ namespace ScheduleMaster.Services
         //POST
         public void AddNew1Schedule(string userId, string scheduleName)
         {
-            using (conn)
+            using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("INSERT INTO schedules(schedule_name, user_email) VALUES(@name, @email); ", conn))
+                using (var cmd = new NpgsqlCommand("INSERT INTO schedules(schedule_name, user_id) VALUES(@name, @email); ", conn))
                 {
                     cmd.Parameters.AddWithValue("name", scheduleName);
                     cmd.Parameters.AddWithValue("email", userId);

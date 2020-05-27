@@ -9,26 +9,31 @@
         <label>
             Email:
         </label>
-        <input type="text" name="email" id="email"/>
+        <input type="text" name="email" id="email" />
 
         <label>
             Password:
         </label>
         <input type="password" name="password" id="password" />
 
-        <input type="submit" value="Login" onclick="doLogin()"/>
-        
+        <input type="submit" value="Login" onclick="doLogin()" />
+
     </div>
-    <br />  
+    <br />
     <div class="schedule hidden">
         <p>LOGIN</p>
         <div id="my_schedule">
             <ul id="schedule_list">
-
             </ul>
         </div>
 
     </div>
-    <br />  
+    <br />
+    <div class="create_schedule hidden">
+        <label for="">Title:</label>
+        <input type="text" name="title" id="title">
+
+        <input type="submit" value="Create" onclick="createSchedule()">
+    </div>
 </body>
 </html>

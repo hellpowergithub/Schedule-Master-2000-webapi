@@ -52,12 +52,12 @@ namespace Schedule_Master_2000_webapi.Controllers
 
         //Post request MISSING (tomorrow, Wednesday)
 
-        [HttpPost]
-        public void PostNew1Schedule(string email, string name)
+        [HttpPost("[action]")]
+        public void CreateSchedule([FromForm] string name)
         {
-
+            string email = HttpContext.User.FindFirstValue("Email");
             // name = schedule's name
-            dbService.AddNew1Schedule("erik@erik.com", "new Schedule");
+            dbService.AddNew1Schedule(email, name);
             //response ID back maybe
 
         }
